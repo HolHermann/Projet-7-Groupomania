@@ -1,0 +1,53 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 60%;
+
+  background: #d1505a;
+  color: rgb(253, 251, 251);
+
+  @include mobile-only {
+    padding: 0 2% 0 2%;
+    justify-content: flex-start;
+
+    width: 100%;
+  }
+
+  ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    justify-content: space-around;
+
+    @include mobile-only {
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap-reverse;
+    }
+
+    li {
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: rgb(253, 251, 251);
+      }
+    }
+  }
+
+  .fa-sign-out-alt {
+    font-size: 1.2em;
+  }
+}

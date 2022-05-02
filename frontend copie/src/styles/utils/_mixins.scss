@@ -1,0 +1,33 @@
+//media queries
+@mixin tablette-only {
+  @media screen and (min-width: map-get($breakpoints, min-tab)) and (max-width: map-get($breakpoints, max-tab)) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media screen and (min-width: map-get($breakpoints, min-desk)) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media screen and (min-width: map-get($breakpoints, min-mob)) and (max-width: map-get($breakpoints, max-mob)) {
+    @content;
+  }
+}
+
+@mixin heart-linear-gradient(
+  $color-top: $color-secondary,
+  $color-bottom: $color-primary
+) {
+  font-family: "Font Awesome 5 free";
+  content: "\f004";
+  font-weight: 900;
+  color: transparent;
+  background: linear-gradient(to top, $color-top, $color-bottom);
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition-duration: 500ms;
+  transition-delay: 10ms;
+}

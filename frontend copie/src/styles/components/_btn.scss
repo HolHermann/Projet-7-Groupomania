@@ -1,0 +1,82 @@
+.active-btn {
+  background: $btn-active;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
+.btn {
+  position: relative;
+  padding: 0.5em;
+  width: auto;
+  border-radius: 5px;
+  border: none;
+  background: teal;
+  filter: hue-rotate(0deg);
+  animation: animColor 0.8s linear infinite;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+    filter: hue-rotate(0deg);
+    animation: anim 0.9s linear infinite;
+    inset: 0px;
+  }
+}
+
+@keyframes anim {
+  50% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 1;
+    filter: hue-rotate(100deg);
+  }
+}
+
+@keyframes animColor {
+  50% {
+    filter: hue-rotate(50deg);
+  }
+
+  100% {
+    filter: hue-rotate(100deg);
+  }
+}
+
+.fa-heart {
+  cursor: pointer;
+  font-family: "Font Awesome 5 Free";
+  // content: "\f004";
+  font-weight: 200;
+  font-size: 1.5em;
+}
+
+.heart-checked {
+  font-family: "Font Awesome 5 free";
+  font-size: 1.5em;
+  content: "\f004";
+  font-weight: 900;
+  color: transparent;
+  background: linear-gradient(to top, rgb(189, 28, 28), rgb(253, 3, 3));
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition-duration: 500ms;
+  transition-delay: 10ms;
+}
+
+#image-upload {
+  display: none;
+}
+
+button {
+  background: $white-bg;
+  padding: 0.3em;
+  border: none;
+  border-radius: 20px;
+}

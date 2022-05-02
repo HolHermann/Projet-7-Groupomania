@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  font-size: 1.01em;
+
+  &::selection {
+    background: $btn-active;
+  }
+}
+
+#root {
+  margin: auto;
+  width: 100%;
+}
+
+body {
+  width: auto;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.fas,
+.fa {
+  cursor: pointer;
+  font-size: 1.4em;
+}
+
+h1 {
+  font-family: "Bakbak One", cursive;
+  font-size: 2.2em;
+  color: $white-bg;
+
+  @include mobile-only {
+    font-size: 1em;
+  }
+}
+
+p,
+a,
+span,
+textarea::placeholder {
+  font-family: "Short Stack", cursive;
+}
+
+h2 {
+  font-family: "Syne Mono", monospace;
+  font-size: 1.2em;
+}

@@ -1,0 +1,168 @@
+.profil-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: #d4d4d4;
+  min-height: 90vh;
+
+  .options-profil-update,
+  .options-profil {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 5%;
+
+    li {
+      padding: 1.2em;
+      cursor: pointer;
+    }
+  }
+
+  .options-profil-update {
+    background: #000;
+    color: $white-bg;
+  }
+
+  #UserPost {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include mobile-only {
+      width: 100%;
+      padding: 0 2% 0 2%;
+    }
+  }
+
+  .post-list {
+    width: 100%;
+  }
+}
+
+.profil-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  button {
+    background: $white-bg;
+    padding: 0.5em;
+    border: none;
+    border-radius: 20px;
+  }
+  button:hover {
+    background: #d1505a;
+    color: white;
+    padding: 0.5em;
+    border: none;
+    border-radius: 20px;
+  }
+}
+
+.update-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 90vh;
+  padding: 30px 2% 30px 2%;
+  background: #0a1f43;
+
+  @include mobile-only {
+    width: 100%;
+  }
+
+  h2,
+  p {
+    color: $white-bg;
+  }
+
+  .bio-update,
+  .username-update,
+  .unsubscribe {
+    margin: 10px 0 10px 0;
+    width: 100%;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .update-profil-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    input,
+    button {
+      margin: 10px 0 10px 0;
+    }
+  }
+
+  .pic-container {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+    margin: 10px 0 10px 0;
+
+    @include mobile-only {
+      height: 25%;
+      width: 100%;
+    }
+
+    img {
+      object-fit: cover;
+      border-radius: 100%;
+      background: radial-gradient(red, blue);
+      width: 300px;
+      height: 300px;
+
+      @include mobile-only {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  }
+}
+
+.upload-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
+
+  label {
+    color: $white-bg;
+    padding: 0.3em;
+    background: #d1505a;
+  }
+  label:hover {
+    color: $white-bg;
+    padding: 0.3em;
+    background: black;
+  }
+  input[type="file"] {
+    background: $btn-active;
+    border-radius: 5px;
+    padding: 1em;
+    width: 100%;
+
+    @include mobile-only {
+      width: 100%;
+    }
+  }
+}
+.hidden {
+  display: none;
+}

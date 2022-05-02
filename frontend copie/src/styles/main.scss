@@ -1,0 +1,19 @@
+@import "./utils/variables";
+// // @import "./utils/functions";
+@import "./utils/mixins";
+@import "./base/styleBase";
+@import "./components/btn";
+@import "./components/avatar";
+@import "./components/card";
+@import "./components/pre-render-post";
+@import "./components/comment";
+@import "./layout/header";
+@import "./layout/nav";
+@import "./layout/footer";
+@import "./pages/home";
+@import "./pages/profil";
+@import "./pages/feed";
+
+//google fonts
+
+@import url("https://fonts.googleapis.com/css2?family=Bakbak+One&family=Short+Stack&family=Syne+Mono&display=swap");
