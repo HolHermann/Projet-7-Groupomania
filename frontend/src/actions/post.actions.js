@@ -6,6 +6,7 @@ export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST_CONTENT = "UPDATE_POST_CONTENT";
 export const UPDATE_POST_PIC = "UPDATE_POST_PIC";
 export const DELETE_POST = "DELETE_POST";
+export const DELETE_POST_PIC = "DELETE_POST_PIC";
 export const CREATE_POST_WITH_PIC = "CREATE_POST_WITH_PIC";
 export const CREATE_POST_CONTENT = "CREATE_POST_CONTENT";
 
@@ -151,6 +152,30 @@ export const updatePostPic = (postId, userId, data) => {
     }
   };
 };
+export const deletePostPic = (postId) => {
+  return async (dispatch) => {
+    try {
+      await axios({
+        method: "delete",
+        url: `${process.env.REACT_APP_API_URL}api/post/delete/pic/${postId}`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      dispatch({ type: DELETE_POST_PIC, payload: { postId } });
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        alert(error.response.data.message);
+      }
+      if (error.response.status === 401) {
+        localStorage.clear();
+        window.location = "/";
+      }
+    }
+  };
+};
+
 export const deletePost = (postId) => {
   return async (dispatch) => {
     try {

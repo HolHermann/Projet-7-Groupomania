@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePostContent, updatePostPic } from "../../actions/post.actions";
+import {
+  updatePostContent,
+  updatePostPic,
+  deletePostPic,
+} from "../../actions/post.actions";
 
 import { loginContext } from "../AppContext";
 import { isEmpty } from "../../utils/utils";
@@ -103,6 +107,34 @@ const Card = ({ post }) => {
                         </>
                       ) : null}
                     </form>
+                  )}
+                  {post.attachment !== "" && (
+                    <label
+                      tabIndex={0}
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `Voulez vous vraiment supprimer la photo ?`
+                          )
+                        ) {
+                          dispatch(deletePostPic(post.id, uId));
+                          window.location = "/feed";
+                        }
+                      }}
+                      onKeyPress={() => {
+                        if (
+                          window.confirm(
+                            `Voulez vous vraiment supprimer la photo ?`
+                          )
+                        ) {
+                          dispatch(deletePostPic(post.id, uId));
+                          window.location = "/feed";
+                        }
+                      }}
+                      htmlFor="supprimer"
+                    >
+                      Supprimer la photo
+                    </label>
                   )}
                 </div>
               )}

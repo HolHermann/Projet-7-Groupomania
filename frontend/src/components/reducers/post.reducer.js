@@ -4,6 +4,7 @@ import {
   UNLIKE_POST,
   UPDATE_POST_CONTENT,
   UPDATE_POST_PIC,
+  DELETE_POST_PIC,
   DELETE_POST,
   DELETE_COMMENT,
   UPDATE_COMMENT,
@@ -49,6 +50,17 @@ export default function postReducer(state = initialState, action) {
         return post;
       });
     case UPDATE_POST_PIC:
+      return state.map((post) => {
+        if (post.id === action.payload.postId) {
+          return {
+            ...post,
+            attachment: action.payload.attachment,
+          };
+        }
+
+        return post;
+      });
+    case DELETE_POST_PIC:
       return state.map((post) => {
         if (post.id === action.payload.postId) {
           return {

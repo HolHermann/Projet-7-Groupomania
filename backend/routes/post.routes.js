@@ -12,6 +12,7 @@ router.post(
   postController.createPost
 );
 router.delete("/delete/:id", auth, postController.deletePost);
+router.delete("/delete/pic/:id", auth, postController.deletePostPic);
 router.get("/", auth, postController.getAllPost);
 router.put(
   "/update/:id",

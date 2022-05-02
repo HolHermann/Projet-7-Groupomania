@@ -25,14 +25,7 @@ exports.createPost = (req, res) => {
 };
 
 exports.updatePost = (req, res) => {
-  const postUpdate = req.file
-    ? {
-        ...JSON.parse(req.body.post),
-        attachment: `${req.protocol}://${req.get(
-          "host"
-        )}/public/postPic/picOf-${req.auth.userId}/${req.file.filename}`,
-      }
-    : { ...req.body };
+  const postUpdate = req.body;
   if (postUpdate.content.trim().length === 0 && !req.file) {
     return res.status(400).json({
       message:
@@ -48,12 +41,6 @@ exports.updatePost = (req, res) => {
       }
       if (req.auth.userId !== post.userId) {
         return res.status(401).json({ message: "Requête non autorisée" });
-      }
-      if (req.file && post.attachment !== "") {
-        const imageToDelete = post.attachment.split(
-          `/public/postPic/picOf-${post.userId}`
-        )[1];
-        fs.unlinkSync(`public/postPic/picOf-${post.userId}/${imageToDelete}`);
       }
       db.Post.update({ ...postUpdate }, { where: { id: req.params.id } })
         .then(() =>
@@ -77,6 +64,12 @@ exports.updatePostPic = (req, res) => {
       if (req.auth.userId !== post.userId) {
         return res.status(401).json({ message: "Requête non autorisée" });
       }
+      if (req.file && post.attachment !== "") {
+        const imageToDelete = post.attachment.split(
+          `/public/postPic/picOf-${post.userId}`
+        )[1];
+        fs.unlinkSync(`public/postPic/picOf-${post.userId}/${imageToDelete}`);
+      }
       post
         .update({
           attachment: `${req.protocol}://${req.get(
@@ -87,6 +80,33 @@ exports.updatePostPic = (req, res) => {
           res.status(200).json({ message: "post mis à jour avec succés" })
         )
         .catch((err) => res.status(500).json({ err }));
+    })
+    .catch((err) => res.status(500).json({ err }));
+};
+exports.deletePostPic = (req, res) => {
+  db.Post.findOne({
+    where: { id: req.params.id },
+  })
+    .then((post) => {
+      if (!post) {
+        return res.status(400).json({ message: "Post non trouvé" });
+      }
+      if (post.userId !== req.auth.userId && req.admin.isAdmin === false) {
+        return res.status(401).json({ message: "Requête non autorisée" });
+      }
+      if (post.attachment && post.attachment !== "") {
+        const imageToDelete = post.attachment.split(
+          `/public/postPic/picOf-${post.userId}`
+        )[1];
+        fs.unlink(`public/postPic/picOf-${post.userId}/${imageToDelete}`, () =>
+          console.log("image supprimée")
+        );
+      }
+
+      post
+        .update({ attachment: "" })
+        .then(() => res.status(200).json({ message: "Post supprimé" }))
+        .catch((err) => res.status(400).json({ err }));
     })
     .catch((err) => res.status(500).json({ err }));
 };
