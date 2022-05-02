@@ -127,7 +127,7 @@ export const updatePostContent = (postId, userId, content) => {
   };
 };
 
-export const updatePostPic = (postId, userId, data) => {
+export const updatePostPic = (postId, data) => {
   return async (dispatch) => {
     try {
       await axios({

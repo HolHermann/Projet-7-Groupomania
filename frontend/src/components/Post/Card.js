@@ -41,7 +41,7 @@ const Card = ({ post }) => {
     e.preventDefault();
     const data = new FormData();
     data.append("image", file);
-    dispatch(updatePostPic(post.id, uId, data));
+    dispatch(updatePostPic(post.id, data));
     setFile("");
   };
   useEffect(() => {
@@ -78,7 +78,7 @@ const Card = ({ post }) => {
                     alt={post.content}
                   />
                   {userData.id === post.userId && (
-                    <form action="" onSubmit={handlePic}>
+                    <form action="" id={post.id} onSubmit={handlePic}>
                       <label
                         tabIndex={0}
                         onKeyPress={onUploadLabel}
@@ -95,6 +95,8 @@ const Card = ({ post }) => {
                         onChange={(e) => {
                           if (e.target.files[0].size > 3670016)
                             return alert("Fichier trop volumineux");
+                          const idpost = post.id;
+                          console.log(idpost);
                           document.querySelector(".card-picture").src =
                             URL.createObjectURL(e.target.files[0]);
                           setFile(e.target.files[0]);
