@@ -4,6 +4,7 @@ import {
   updatePostContent,
   updatePostPic,
   deletePostPic,
+  deletePost,
 } from "../../actions/post.actions";
 
 import { loginContext } from "../AppContext";
@@ -120,8 +121,12 @@ const Card = ({ post }) => {
                               `Voulez vous vraiment supprimer la photo ?`
                             )
                           ) {
-                            dispatch(deletePostPic(post.id, uId));
-                            window.location = "/feed";
+                            if (post.content === "") {
+                              dispatch(deletePost(post.id));
+                            } else {
+                              dispatch(deletePostPic(post.id, uId));
+                              window.location = "/feed";
+                            }
                           }
                         }}
                         onKeyPress={() => {
@@ -130,8 +135,12 @@ const Card = ({ post }) => {
                               `Voulez vous vraiment supprimer la photo ?`
                             )
                           ) {
-                            dispatch(deletePostPic(post.id, uId));
-                            window.location = "/feed";
+                            if (post.content === "") {
+                              dispatch(deletePost(post.id));
+                            } else {
+                              dispatch(deletePostPic(post.id, uId));
+                              window.location = "/feed";
+                            }
                           }
                         }}
                         htmlFor="supprimer"
