@@ -110,34 +110,36 @@ const Card = ({ post }) => {
                       ) : null}
                     </form>
                   )}
-                  {post.attachment !== "" && (
-                    <label
-                      tabIndex={0}
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            `Voulez vous vraiment supprimer la photo ?`
-                          )
-                        ) {
-                          dispatch(deletePostPic(post.id, uId));
-                          window.location = "/feed";
-                        }
-                      }}
-                      onKeyPress={() => {
-                        if (
-                          window.confirm(
-                            `Voulez vous vraiment supprimer la photo ?`
-                          )
-                        ) {
-                          dispatch(deletePostPic(post.id, uId));
-                          window.location = "/feed";
-                        }
-                      }}
-                      htmlFor="supprimer"
-                    >
-                      Supprimer la photo
-                    </label>
-                  )}
+                  {userData.id === post.userId || userData.isAdmin === true ? (
+                    <div>
+                      <label
+                        tabIndex={0}
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              `Voulez vous vraiment supprimer la photo ?`
+                            )
+                          ) {
+                            dispatch(deletePostPic(post.id, uId));
+                            window.location = "/feed";
+                          }
+                        }}
+                        onKeyPress={() => {
+                          if (
+                            window.confirm(
+                              `Voulez vous vraiment supprimer la photo ?`
+                            )
+                          ) {
+                            dispatch(deletePostPic(post.id, uId));
+                            window.location = "/feed";
+                          }
+                        }}
+                        htmlFor="supprimer"
+                      >
+                        Supprimer la photo
+                      </label>
+                    </div>
+                  ) : null}
                 </div>
               )}
               {isUpdated && (
