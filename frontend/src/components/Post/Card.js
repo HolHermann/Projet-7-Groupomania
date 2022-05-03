@@ -79,7 +79,7 @@ const Card = ({ post }) => {
                     alt={post.content}
                   />
                   {userData.id === post.userId && (
-                    <form action="" id={post.id} onSubmit={handlePic}>
+                    <form action="" onSubmit={handlePic}>
                       <label
                         tabIndex={0}
                         onKeyPress={onUploadLabel}
