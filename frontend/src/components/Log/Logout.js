@@ -1,9 +1,9 @@
 import React from "react";
-
+// Déconnexion du compte
 const Logout = () => {
   const handlelogout = () => {
-    localStorage.clear();
-    window.location = "/";
+    localStorage.clear(); // suppression des données du localstorage
+    window.location = "/"; // redirection sur le page d'acceil
   };
 
   return (

@@ -14,7 +14,7 @@ const UploadAvatar = () => {
     e.preventDefault();
     const data = new FormData();
     data.append("image", file);
-    dispatch(updateAvatar(data, userData.id));
+    dispatch(updateAvatar(data, userData.id)); // mise à jour de la photo de profil
     setFile("");
   };
   return (
@@ -37,7 +37,7 @@ const UploadAvatar = () => {
           setFile(e.target.files[0]);
         }}
       />
-      {file ? (
+      {file ? ( // si on a un fichier
         <>
           <input type="submit" value="Valider" />
           <button onClick={cancel}>Annuler</button>

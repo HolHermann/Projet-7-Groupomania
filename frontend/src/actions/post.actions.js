@@ -1,5 +1,5 @@
 import axios from "axios";
-
+// Posts
 export const GET_POSTS = "GET_POSTS";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
@@ -9,11 +9,11 @@ export const DELETE_POST = "DELETE_POST";
 export const DELETE_POST_PIC = "DELETE_POST_PIC";
 export const CREATE_POST_WITH_PIC = "CREATE_POST_WITH_PIC";
 export const CREATE_POST_CONTENT = "CREATE_POST_CONTENT";
-
+// Commentaire
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
-
+// Obtenir les posts
 export const getPosts = (num) => {
   return async (dispatch) => {
     try {
@@ -24,6 +24,7 @@ export const getPosts = (num) => {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      // Post de 1 à 6
       const array = res.data.slice(0, num);
       dispatch({ type: GET_POSTS, payload: array });
     } catch (error) {
@@ -38,6 +39,7 @@ export const getPosts = (num) => {
     }
   };
 };
+// Créer un post avec une photo
 export const createPostWithPic = (data) => {
   return async (dispatch) => {
     try {
@@ -62,6 +64,7 @@ export const createPostWithPic = (data) => {
     }
   };
 };
+// Créer un post avec du texte
 export const createPostContent = (userId, content) => {
   return async (dispatch) => {
     try {
@@ -95,7 +98,7 @@ export const createPostContent = (userId, content) => {
     }
   };
 };
-
+// Mettre à jour le contenu d'un post
 export const updatePostContent = (postId, userId, content) => {
   return async (dispatch) => {
     try {
@@ -126,7 +129,7 @@ export const updatePostContent = (postId, userId, content) => {
     }
   };
 };
-
+// Mettre à jour la photo d'un post
 export const updatePostPic = (postId, data) => {
   return async (dispatch) => {
     try {
@@ -152,6 +155,7 @@ export const updatePostPic = (postId, data) => {
     }
   };
 };
+// Supprimer la photo d'un post
 export const deletePostPic = (postId) => {
   return async (dispatch) => {
     try {
@@ -175,7 +179,7 @@ export const deletePostPic = (postId) => {
     }
   };
 };
-
+// Supprimer le post
 export const deletePost = (postId) => {
   return async (dispatch) => {
     try {
@@ -199,7 +203,7 @@ export const deletePost = (postId) => {
     }
   };
 };
-
+// Créer un commentaire
 export const createComment = (userId, postId, content) => {
   return async (dispatch) => {
     try {
@@ -231,7 +235,7 @@ export const createComment = (userId, postId, content) => {
     }
   };
 };
-
+// Mettre à jour un commentaire
 export const updateComment = (postId, commentId, content) => {
   return async (dispatch) => {
     try {
@@ -264,7 +268,7 @@ export const updateComment = (postId, commentId, content) => {
     }
   };
 };
-
+// Supprimer un commentaire
 export const deleteComment = (postId, commentId) => {
   return async (dispatch) => {
     try {
@@ -288,7 +292,7 @@ export const deleteComment = (postId, commentId) => {
     }
   };
 };
-
+// Liker un post
 export const likePost = (postId) => {
   return async (dispatch) => {
     try {
@@ -313,6 +317,7 @@ export const likePost = (postId) => {
     }
   };
 };
+// Enlever le like d'un post
 export const unlikePost = (postId) => {
   return async (dispatch) => {
     try {

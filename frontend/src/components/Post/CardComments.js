@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment, getPosts } from "../../actions/post.actions";
 import DeleteEditComment from "./DeleteEditComment";
-
+// Gestion des commentaires
 const CardComments = ({ post }) => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const CardComments = ({ post }) => {
   return (
     <div className="comments-container">
       {post.Comments.map((comment) => {
+        // on affiche tous les commentaires d'un post
         return (
           <article
             className={
@@ -40,6 +41,7 @@ const CardComments = ({ post }) => {
                   usersData.length >= 0
                     ? usersData
                         .map((user) => {
+                          // on cherche l'user qui a créer le commentaire pour afficher les données demandées
                           if (user.id === comment.userId) return user.avatar;
                           else return null;
                         })
@@ -65,7 +67,7 @@ const CardComments = ({ post }) => {
               <p>{comment.content}</p>
 
               <div className="edit-comment-container">
-                {userData.id === comment.userId || userData.isAdmin === true ? (
+                {userData.id === comment.userId || userData.isAdmin === true ? ( // on vérifie si l'user et le créateur du commentaire ou l'admin
                   <DeleteEditComment comment={comment} postId={post.id} />
                 ) : null}
               </div>
@@ -82,9 +84,9 @@ const CardComments = ({ post }) => {
             onChange={(e) => setText(e.target.value)}
             value={text}
             placeholder={
-              post.Comments.length === 0
+              post.Comments.length === 0 // s'il n'y a pas de commentaires :
                 ? "Soyez le premier à commenter"
-                : "Commenter"
+                : "Commenter" // si il y'a déjà des commentaires
             }
           />
           <br />

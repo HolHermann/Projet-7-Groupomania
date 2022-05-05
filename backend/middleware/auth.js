@@ -18,6 +18,7 @@ module.exports = async (req, res, next) => {
       return res
         .status(401)
         .json({ message: `l'id : ${userId} n'existe pas.` });
+      //s’il y a un userId dans la requête du corps et si l'userId n’est pas le même que dans le token
     } else if (req.body.userId && req.body.userId !== userId) {
       return res.status(401).json({ message: "Requête non autorisée" });
     } else {

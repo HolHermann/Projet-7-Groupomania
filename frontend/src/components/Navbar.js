@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { loginContext } from "./AppContext";
 import Logout from "./Log/Logout";
 import { useSelector } from "react-redux";
+// component pour la barre de navigation
 const Navbar = () => {
   const uId = useContext(loginContext);
   const userData = useSelector((state) => state.userReducer);

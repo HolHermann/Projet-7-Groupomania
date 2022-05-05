@@ -14,7 +14,7 @@ import { onUploadLabel } from "../../utils/utils";
 import DeleteCard from "./DeleteCard";
 import LikeBtn from "./LikeBtn";
 import CardComments from "./CardComments";
-
+// On affiche tous les posts
 const Card = ({ post }) => {
   const dispatch = useDispatch();
   const uId = useContext(loginContext);
@@ -42,7 +42,7 @@ const Card = ({ post }) => {
     e.preventDefault();
     const data = new FormData();
     data.append("image", file);
-    dispatch(updatePostPic(post.id, data));
+    dispatch(updatePostPic(post.id, data)); // Mise à jour de la photo d'un post
     setFile("");
   };
   useEffect(() => {
@@ -53,6 +53,7 @@ const Card = ({ post }) => {
       {loading ? (
         <i className="fas fa-spinner fa-spin"></i>
       ) : (
+        // on affiche les donneés des users avec leur post
         <>
           <article>
             <div className="card-header">
@@ -78,7 +79,7 @@ const Card = ({ post }) => {
                     src={post.attachment}
                     alt={post.content}
                   />
-                  {userData.id === post.userId && (
+                  {userData.id === post.userId && ( // on vérifie si l'user et le créateur du post
                     <form action="" onSubmit={handlePic}>
                       <label
                         tabIndex={0}
@@ -111,7 +112,7 @@ const Card = ({ post }) => {
                       ) : null}
                     </form>
                   )}
-                  {userData.id === post.userId || userData.isAdmin === true ? (
+                  {userData.id === post.userId || userData.isAdmin === true ? ( // on vérifie si l'user et le créateur du post ou l'admin
                     <div>
                       <label
                         tabIndex={0}
@@ -151,7 +152,7 @@ const Card = ({ post }) => {
                   ) : null}
                 </div>
               )}
-              {isUpdated && (
+              {isUpdated && ( // si une modification est en cours
                 <div className="update-post">
                   <textarea
                     className="update-content-post"
@@ -167,7 +168,7 @@ const Card = ({ post }) => {
               )}
             </div>
             <div className="edit-ctrl-container">
-              {userData.id === post.userId && (
+              {userData.id === post.userId && ( // on vérifie si l'user et le créateur du post
                 <>
                   <div className="btn-container">
                     <div
@@ -183,7 +184,7 @@ const Card = ({ post }) => {
                   </div>
                 </>
               )}
-              {userData.id === post.userId || userData.isAdmin === true ? (
+              {userData.id === post.userId || userData.isAdmin === true ? ( // on vérifie si l'user et le créateur du post ou l'admin
                 <div className="btn-container">
                   <DeleteCard id={post.id} />
                 </div>

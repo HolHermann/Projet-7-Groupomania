@@ -3,7 +3,7 @@ import { loginContext } from "../components/AppContext";
 
 import ProfilUser from "../components/profil/ProfilUser";
 import UpdateProfil from "../components/profil/UpdateProfil";
-
+// page pour la modification du profil
 const Profil = () => {
   const [profilModal, setProfilModal] = useState(true);
   const [updateModal, setUpdateModal] = useState(false);
@@ -20,7 +20,7 @@ const Profil = () => {
   return (
     <div className="profil-page">
       <ul className={updateModal ? "options-profil-update" : "options-profil"}>
-        {uId ? (
+        {uId ? ( // si l'user est connecté
           <>
             <li
               onClick={handleModals}

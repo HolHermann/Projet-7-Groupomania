@@ -4,7 +4,7 @@ const passwordValidator = require("password-validator");
 exports.email = [
   body("email")
     .notEmpty()
-    .isEmail()
+    .isEmail() //Vérifie si c'est bien un email
     .normalizeEmail({ lowercase: true })
     .withMessage("Format email invalide"),
   (req, res, next) => {
@@ -44,11 +44,11 @@ exports.password = (req, res, next) => {
 };
 exports.username = [
   body("username")
-    .notEmpty()
-    .isLength({ min: 3 })
+    .notEmpty() // Ne peut pas être vide
+    .isLength({ min: 3 }) // Taille minimum de trois
     .withMessage("Votre prénom doit contenir minimum 3 caractères !")
     .blacklist("{}$<>=") //Interdire ces caractères spéciaux
-    .isAlpha("fr-FR", { ignore: " -" })
+    .isAlpha("fr-FR", { ignore: "-" })
     .withMessage(
       "Votre username ne doit pas contenir de chiffres ni caractères spéciaux, 3 caractères minimum"
     ),

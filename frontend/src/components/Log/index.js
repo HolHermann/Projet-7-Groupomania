@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-
+// Afficher le formulaire de création de compte ou d'authentification
 const Log = (props) => {
   const [signUpModal, setSignUpModal] = useState(props.signup);
   const [loginModal, setLoginModal] = useState(props.login);

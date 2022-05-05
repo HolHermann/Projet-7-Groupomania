@@ -6,10 +6,10 @@ const storage = multer.diskStorage({
     callback(null, `public/postPic/picOf-${req.auth.userId}`);
   },
   filname: (req, file, callback) => {
-    const name = file.originalname.split(" ").join("_");
+    const name = file.originalname.split(" ").join("_"); // Suppression des espaces avec _ à la palce
 
     const extension = file.mimetype.split("/")[1];
-    callback(null, name + Date.now() + "." + extension);
+    callback(null, name + Date.now() + "." + extension); // On renomme le fichier
   },
 });
 const upload = multer({

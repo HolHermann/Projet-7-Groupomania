@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 
+// Création d'un compte
 exports.signUp = (req, res) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -10,10 +11,10 @@ exports.signUp = (req, res) => {
       db.User.create({
         username: req.body.username,
         email: req.body.email,
-        password: hash,
+        password: hash, // On renvoit le hash du mot de passe
         avatar: `${req.protocol}://${req.get(
           "host"
-        )}/public/defaultPicture/random-user.png`,
+        )}/public/defaultPicture/random-user.png`, // Photo de profil par défault
         bio: req.body.bio,
       })
         .then((user) => {
@@ -36,7 +37,7 @@ exports.signUp = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
-
+// Connexion au compte
 exports.signIn = (req, res) => {
   db.User.findOne({
     where: {
@@ -48,7 +49,7 @@ exports.signIn = (req, res) => {
         return res.status(404).json({ message: "Utilisateur introuvable" });
       }
       bcrypt
-        .compare(req.body.password, user.password)
+        .compare(req.body.password, user.password) // Comparaison des hashs
         .then((valid) => {
           if (!valid) {
             return res.status(401).json({ message: "Mot de passe incorrect" });
@@ -62,7 +63,7 @@ exports.signIn = (req, res) => {
               },
               "TOKEN",
               {
-                expiresIn: "24h",
+                expiresIn: "24h", // Expiration du token sous 24h
               }
             ),
           });
@@ -71,7 +72,7 @@ exports.signIn = (req, res) => {
     })
     .catch((err) => res.status(500).json(err));
 };
-
+//Mis à jour du compte
 exports.updateUser = (req, res) => {
   db.User.findOne({
     where: {
@@ -82,6 +83,7 @@ exports.updateUser = (req, res) => {
       if (!user) {
         return res.status(404).json({ message: "Utilisateur non trouvé" });
       }
+      // Seul l'hôte ou le détenteur du compte peut effectuer des modifications
       if (req.auth.userId !== user.id && req.admin.isAdmin === false) {
         return res.status(401).json({ message: "Requête non autorisée" });
       }
@@ -102,6 +104,7 @@ exports.updateUser = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
+//Mise à jour de la biographie
 exports.updateBio = (req, res) => {
   db.User.findOne({
     where: {
@@ -125,7 +128,7 @@ exports.updateBio = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
-
+//Obtenir un utilisateur
 exports.getOneUser = (req, res) => {
   db.User.findOne({
     attributes: { exclude: ["password"] },
@@ -139,14 +142,15 @@ exports.getOneUser = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
+// Obtenir tous les utilisateurs
 exports.getAllUsers = (req, res, next) => {
   db.User.findAll({
-    attributes: { exclude: ["password"] },
+    attributes: { exclude: ["password"] }, //Sans afficher leur mots de passe
   })
     .then((users) => res.status(200).json(users))
     .catch((err) => res.status(400).json({ err }));
 };
-
+// Supprimer un utilisateur
 exports.deleteUser = (req, res) => {
   db.User.findOne({
     where: {
@@ -185,7 +189,7 @@ exports.deleteUser = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
-
+// Mettre à jour une photo de profil
 exports.updateAvatar = (req, res) => {
   db.User.findOne({
     where: {

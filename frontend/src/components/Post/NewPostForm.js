@@ -6,7 +6,7 @@ import {
   createPostWithPic,
   getPosts,
 } from "../../actions/post.actions";
-
+//Création d'un post
 const NewPostForm = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -30,11 +30,13 @@ const NewPostForm = () => {
       data.append("post", JSON.stringify(newPost));
       data.append("image", file);
       dispatch(createPostWithPic(data)).then(() => {
+        // créer un post avec une photo
         dispatch(getPosts());
         cancelPost();
       });
     } else if (content && content.trim().length !== 0) {
       dispatch(createPostContent(userData.id, content)).then(() => {
+        // créer un post avec du texte
         dispatch(getPosts());
         cancelPost();
       });

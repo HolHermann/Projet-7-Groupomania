@@ -1,6 +1,6 @@
 {
     "development": {
-      "username": "root",
+      "username": "root", 
       "password": "mySQLpassword",
       "database": "database_hermann",
       "host": "127.0.0.1",

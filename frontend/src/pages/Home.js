@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import Log from "../components/Log";
+// page d'acceuol
 const Home = () => {
   return (
     <>

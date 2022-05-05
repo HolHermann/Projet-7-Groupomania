@@ -13,7 +13,7 @@ import { getToken } from "./utils/utils";
 const App = () => {
   const [uId, setUid] = useState(null);
   const [myToken, setMyToken] = useState(null);
-
+  // on vérifie si le token est valide et non expiré
   const dispatch = useDispatch();
   const isLogged = () => {
     setUid(parseInt(localStorage.getItem("id")));
@@ -23,8 +23,8 @@ const App = () => {
       const isMyTokenExpired = isExpired(myToken);
 
       if (!myDecodedToken || isMyTokenExpired) {
-        localStorage.clear();
-        window.location = "/";
+        localStorage.clear(); // on vide le localstorage
+        window.location = "/"; // redirection sur la page home
         return;
       } else if (uId && myDecodedToken && !isMyTokenExpired) {
         dispatch(getUser(uId));
@@ -36,6 +36,7 @@ const App = () => {
   useEffect(isLogged);
 
   return (
+    // path="*" = tout lien en dehors des 3 précedents = redirection sur la page Home
     <loginContext.Provider value={uId}>
       <BrowserRouter>
         <Navbar />

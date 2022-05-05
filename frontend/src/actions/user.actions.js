@@ -7,7 +7,7 @@ export const UPLOAD_ERRORS = "UPLOAD_ERRORS";
 export const UPLOAD_AVATAR_ERRORS = "UPLOAD_AVATAR_ERRORS";
 export const UPDATE_BIO_ERRORS = "UPDATE_BIO_ERRORS";
 export const UPDATE_USERNAME_ERRORS = "UPDATE_USERNAME_ERRORS";
-
+//Obtenir un user
 export const getUser = (uId) => {
   return async (dispatch) => {
     try {
@@ -31,6 +31,7 @@ export const getUser = (uId) => {
     }
   };
 };
+//Mettre à jour la photo de profil
 export const updateAvatar = (data, id) => {
   return async (dispatch) => {
     try {
@@ -62,6 +63,7 @@ export const updateAvatar = (data, id) => {
     }
   };
 };
+//Mettre à jour la bio
 export const updateBio = (bio, id) => {
   return async (dispatch) => {
     try {
@@ -87,6 +89,7 @@ export const updateBio = (bio, id) => {
     }
   };
 };
+//Mettre à jour l'username
 export const updateUsername = (username, password, id) => {
   return async (dispatch) => {
     try {

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import LoginForm from "./LoginForm";
-
+// Formulaire de création d'un compte
 const SignUpForm = () => {
   const [formSubmit, setFormSubmit] = useState(false);
   const [username, setUserNameValue] = useState("");
@@ -17,9 +17,10 @@ const SignUpForm = () => {
       return (loginError.innerHTML =
         "Les mots de passe ne sont pas identiques");
     }
+    // Communication avec le back grâce à axios
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/register`,
+      url: `${process.env.REACT_APP_API_URL}api/user/register`, // url route back
       withCredentials: false,
       data: {
         username,
@@ -53,7 +54,7 @@ const SignUpForm = () => {
 
   return (
     <>
-      {formSubmit ? (
+      {formSubmit ? ( // si création du compte ok on affiche le component pour se conencter
         <>
           <LoginForm />
           <span className="valid">

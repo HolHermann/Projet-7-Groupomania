@@ -9,8 +9,8 @@ import {
   DELETE_COMMENT,
   UPDATE_COMMENT,
 } from "../../actions/post.actions";
-
-const initialState = {};
+// reducer pour les posts, commentaires et likes
+const initialState = {}; // initilisation du state, vide
 export default function postReducer(state = initialState, action) {
   switch (action.type) {
     case GET_POSTS:

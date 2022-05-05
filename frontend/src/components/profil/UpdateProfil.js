@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateBio, updateUsername } from "../../actions/user.actions";
 import Unsubscribe from "./Unsubscribe";
 import UploadAvatar from "./UploadAvatar";
+// Mise à jour de l'user
 const UpdateProfil = () => {
   const userData = useSelector((state) => state.userReducer);
   const [bio, setBio] = useState("");
@@ -13,20 +14,20 @@ const UpdateProfil = () => {
   const dispatch = useDispatch();
   //
   const handleUpdate = () => {
-    dispatch(updateBio(bio, userData.id));
+    dispatch(updateBio(bio, userData.id)); // Mise à jour de la bio
     setUpdateForm(false);
   };
   const handleUpdateUsername = () => {
-    dispatch(updateUsername(username, password, userData.id));
+    dispatch(updateUsername(username, password, userData.id)); // Mise à jour de l'username
     setupdateFormUsername(false);
   };
   const cancelInfo = (e) => {
     if (e.target.id === "usernameChange") {
       setUsername("");
-      setupdateFormUsername(!updateFormUsername);
+      setupdateFormUsername(!updateFormUsername); //Annulation de la maj de l'username
     } else if (e.target.id === "bioPost") {
       setBio("");
-      setUpdateForm(!updateForm);
+      setUpdateForm(!updateForm); //Annulation de la maj de la bio
     }
   };
   return (
@@ -53,7 +54,7 @@ const UpdateProfil = () => {
                 </button>
               </>
             )}
-            {updateForm && (
+            {updateForm && ( // si une modification est en cours pour la bio
               <>
                 <form className="update-profil-form">
                   <input
@@ -87,7 +88,7 @@ const UpdateProfil = () => {
                 </button>
               </>
             )}
-            {updateFormUsername && (
+            {updateFormUsername && ( // si une modification est en cours pour l'username
               <>
                 <form className="update-profil-form">
                   <input

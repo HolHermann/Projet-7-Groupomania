@@ -3,6 +3,7 @@ import axios from "axios";
 
 const Unsubscribe = ({ user }) => {
   const leave = () => {
+    // Suppresion du compte
     axios({
       method: "delete",
       url: `${process.env.REACT_APP_API_URL}api/user/delete/${user.id}`,
@@ -11,8 +12,8 @@ const Unsubscribe = ({ user }) => {
       },
       data: { userId: user.id },
     }).then(() => {
-      localStorage.clear();
-      window.location = "/";
+      localStorage.clear(); // on vide le localstorage
+      window.location = "/"; // redirection vers la page d'acceuil
     });
   };
   return (
@@ -21,6 +22,7 @@ const Unsubscribe = ({ user }) => {
       onClick={() => {
         if (
           window.confirm(
+            // fenêtre de confirmation avant action
             `Voulez vous vraiment supprimer votre compte ${user.username} ?`
           )
         ) {

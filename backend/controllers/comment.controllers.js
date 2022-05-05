@@ -1,7 +1,8 @@
 const db = require("../models");
-
+//Créer un commentaire
 exports.createComment = (req, res) => {
   if (req.body.content.trim().length === 0)
+    //Vérifie si le commentaire est nul
     return res.status(400).json({
       message:
         "Saisie incorrecte, vous ne pouvez pas saisir uniquement des caractères spéciaux",
@@ -11,7 +12,7 @@ exports.createComment = (req, res) => {
     .then(() => res.status(201).json(comment))
     .catch((err) => res.status(400).json(err));
 };
-
+// Mise à jour du commentaire
 exports.updateComment = (req, res) => {
   if (req.body.content.length === 0) {
     return res.status(400).json({
@@ -33,7 +34,7 @@ exports.updateComment = (req, res) => {
       .then(() => res.status(200).json(req.body.content));
   });
 };
-
+// Obtenir tous les commentaire d'un post
 exports.getAllCommentsAboutPost = (req, res) => {
   db.Comment.findAll({
     where: {
@@ -48,7 +49,7 @@ exports.getAllCommentsAboutPost = (req, res) => {
     .then((comments) => res.status(200).json(comments))
     .catch((error) => res.status(400).json({ error }));
 };
-
+//Supprimer un commentaire
 exports.deleteComment = (req, res) => {
   db.Comment.findOne({
     where: { id: req.params.id },
@@ -57,6 +58,7 @@ exports.deleteComment = (req, res) => {
       if (!comment) {
         return res.status(400).json({ message: "Commentaire introuvable" });
       }
+      //Vérifie si c'est le créateur du commentaire ou l'admin qui effectue la requête
       if (comment.userId !== req.auth.userId && req.admin.isAdmin === false) {
         return res.status(401).json({ message: "Requête non autorisée" });
       }

@@ -4,8 +4,8 @@ import {
   UPDATE_BIO,
   UPLOAD_AVATAR,
 } from "../../actions/user.actions";
-
-const initialState = {};
+// reducer pour les modifications des users
+const initialState = {}; // initilisation du state, vide
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case GET_USER:

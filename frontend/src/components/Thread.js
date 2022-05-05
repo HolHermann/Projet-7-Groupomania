@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/post.actions";
 import Card from "./Post/Card";
 import { isEmpty } from "../utils/utils";
-
+// component pour afficher le fil d'actualité
 const Thread = () => {
   const [loadPost, setLoadPost] = useState(true);
   const [count, setCount] = useState(6);

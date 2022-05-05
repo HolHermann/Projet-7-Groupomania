@@ -1,6 +1,6 @@
 const db = require("../models/index");
 const fs = require("fs");
-
+//Creation d'un post
 exports.createPost = (req, res) => {
   if (req.body.content && req.body.content.trim().length === 0 && !req.file) {
     return res.status(400).json({
@@ -8,7 +8,7 @@ exports.createPost = (req, res) => {
         "Un post ne peut pas être vide et ne peut pas contenir uniquement des caractères spéciaux.",
     });
   }
-  const newPost = req.file
+  const newPost = req.file // On vérifie s'il n'y a pas de ficher
     ? {
         ...JSON.parse(req.body.post),
         attachment: `${req.protocol}://${req.get(
@@ -23,7 +23,7 @@ exports.createPost = (req, res) => {
     .then(() => res.status(201).json(newPost))
     .catch((err) => res.status(400).json({ err }));
 };
-
+//Mise à jour d'un post
 exports.updatePost = (req, res) => {
   const postUpdate = req.body;
   if (postUpdate.content.trim().length === 0 && !req.file) {
@@ -50,7 +50,7 @@ exports.updatePost = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
-
+// Mise à jour d'un photo d'un post
 exports.updatePostPic = (req, res) => {
   db.Post.findOne({
     where: {
@@ -66,6 +66,7 @@ exports.updatePostPic = (req, res) => {
       }
       if (req.file && post.attachment !== "") {
         const imageToDelete = post.attachment.split(
+          // On supprime la photo avant d'en stocker une autre
           `/public/postPic/picOf-${post.userId}`
         )[1];
         fs.unlinkSync(`public/postPic/picOf-${post.userId}/${imageToDelete}`);
@@ -83,6 +84,7 @@ exports.updatePostPic = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
+//Suppression d'une photo
 exports.deletePostPic = (req, res) => {
   db.Post.findOne({
     where: { id: req.params.id },
@@ -91,6 +93,7 @@ exports.deletePostPic = (req, res) => {
       if (!post) {
         return res.status(400).json({ message: "Post non trouvé" });
       }
+      //On vérifie si la requête vient du créateur du post ou d'un admin
       if (post.userId !== req.auth.userId && req.admin.isAdmin === false) {
         return res.status(401).json({ message: "Requête non autorisée" });
       }
@@ -110,7 +113,7 @@ exports.deletePostPic = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
-
+// Suppresion d'un post
 exports.deletePost = (req, res) => {
   db.Post.findOne({
     where: { id: req.params.id },
@@ -138,7 +141,7 @@ exports.deletePost = (req, res) => {
     })
     .catch((err) => res.status(500).json({ err }));
 };
-
+//Obtenir tous les posts
 exports.getAllPost = (req, res) => {
   db.Post.findAll({
     include: [
@@ -151,7 +154,7 @@ exports.getAllPost = (req, res) => {
     .then((posts) => res.status(200).json(posts))
     .catch((error) => res.status(400).json({ error }));
 };
-
+//Obtenir tous les posts d'un utilisateur
 exports.getAllPostOfOneUser = (req, res) => {
   db.Post.findAll({
     where: { userId: req.params.userId },

@@ -1,4 +1,5 @@
 export const isEmpty = (value) => {
+  // vérfication que value n'est pas vide
   return (
     value === undefined ||
     value === null ||
@@ -12,7 +13,7 @@ export const onUploadLabel = (e) => {
     e.target.click();
   }
 };
-
+// obtenir le token grâce au localstorage
 export const getToken = () => {
   return localStorage.getItem("token");
 };

@@ -24,7 +24,7 @@ module.exports = {
         ),
         avatar: "http://localhost:3000/public/defaultPicture/random-user.png",
         bio: "",
-        isAdmin: true,
+        isAdmin: true, // On créait un compte administrateur
         createdAt: new Date(),
         updatedAt: new Date(),
       },

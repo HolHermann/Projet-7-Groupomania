@@ -41,7 +41,7 @@ const ProfilUser = () => {
         <>
           <h2>Vos Publications</h2>
           <ul className="post-list">
-            {!isEmpty(posts[0]) &&
+            {!isEmpty(posts[0]) && // on affiche les posts de l'utilisateur
               posts
                 .filter((post) => post.userId === userData.id)
                 .map((post) => {

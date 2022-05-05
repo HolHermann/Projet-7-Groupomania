@@ -1,5 +1,5 @@
 import React from "react";
-
+// component pour le footer (bas de page)
 const Footer = () => {
   return (
     <footer>

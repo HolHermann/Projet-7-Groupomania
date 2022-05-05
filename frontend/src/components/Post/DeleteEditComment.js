@@ -8,9 +8,11 @@ const DeleteEditComment = ({ comment, postId }) => {
   const [text, setText] = useState("");
   const userData = useSelector((state) => state.userReducer);
 
+  //suppresion d'un commentaire
   const handleDelete = () => {
     dispatch(deleteComment(postId, comment.id));
   };
+  // mise à jour d'un commentaire
   const handleEdit = (e) => {
     e.preventDefault();
     if (text && text.trim().length !== 0) {
@@ -33,7 +35,7 @@ const DeleteEditComment = ({ comment, postId }) => {
         >
           Supprimer
         </span>
-        {userData.id === comment.userId && (
+        {userData.id === comment.userId && ( // si l'user et le créateur du commentaire
           <span
             tabIndex={0}
             onKeyPress={() => {
@@ -47,20 +49,21 @@ const DeleteEditComment = ({ comment, postId }) => {
           </span>
         )}
       </div>
-      {userData.id === comment.userId && edit && (
-        <form action="" onSubmit={handleEdit} className="edit-comment-form">
-          <button onClick={() => setEdit(!edit)}>Annuler</button>
-          <input
-            type="text"
-            name="text"
-            id="text"
-            onChange={(e) => setText(e.target.value)}
-            defaultValue={comment.content}
-          />
+      {userData.id === comment.userId &&
+        edit && ( // si l'user et le créateur du commentaire et qu'il l'édite
+          <form action="" onSubmit={handleEdit} className="edit-comment-form">
+            <button onClick={() => setEdit(!edit)}>Annuler</button>
+            <input
+              type="text"
+              name="text"
+              id="text"
+              onChange={(e) => setText(e.target.value)}
+              defaultValue={comment.content}
+            />
 
-          <input type="submit" value="Valider" />
-        </form>
-      )}
+            <input type="submit" value="Valider" />
+          </form>
+        )}
     </>
   );
 };
