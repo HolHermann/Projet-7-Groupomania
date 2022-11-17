@@ -11,5 +11,6 @@ Faire npm start
 #Partie frontend
 
 Faire npm install
+Faire npm install sass
 Faire npm start
 Si il y'a un problème avec sass : Faire un npm rebuild node-sass
